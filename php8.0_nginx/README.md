@@ -15,23 +15,23 @@ Repository: https://github.com/TrafeX/docker-php-nginx
 * Follows the KISS principle (Keep It Simple, Stupid) to make it easy to understand and adjust the image to your needs
 
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/trafex/alpine-nginx-php7.svg)](https://hub.docker.com/r/trafex/alpine-nginx-php7/)
-[![Docker image layers](https://images.microbadger.com/badges/image/trafex/alpine-nginx-php7.svg)](https://microbadger.com/images/trafex/alpine-nginx-php7)
+[![Docker Pulls](https://img.shields.io/docker/pulls/halobear/php_nginx:8.0.svg)](https://hub.docker.com/r/halobear/php_nginx:8.0/)
+[![Docker image layers](https://images.microbadger.com/badges/image/halobear/php_nginx:8.0.svg)](https://microbadger.com/images/halobear/php_nginx:8.0)
 ![nginx 1.18.0](https://img.shields.io/badge/nginx-1.18-brightgreen.svg)
-![php 7.4](https://img.shields.io/badge/php-7.4-brightgreen.svg)
+![php 8.0](https://img.shields.io/badge/php-8.0-brightgreen.svg)
 ![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ## Usage
 
 Start the Docker container:
 
-    docker run -p 80:8080 trafex/alpine-nginx-php7
+    docker run -p 80:8080 halobear/php_nginx:8.0
 
 See the PHP info on http://localhost, or the static html page on http://localhost/test.html
 
 Or mount your own code to be served by PHP-FPM & Nginx
 
-    docker run -p 80:8080 -v ~/my-codebase:/var/www/html trafex/alpine-nginx-php7
+    docker run -p 80:8080 -v ~/my-codebase:/var/www/html halobear/php_nginx:8.0
 
 ## Configuration
 In [config/](config/) you'll find the default configuration files for Nginx, PHP and PHP-FPM.
@@ -39,15 +39,15 @@ If you want to extend or customize that you can do so by mounting a configuratio
 
 Nginx configuration:
 
-    docker run -v "`pwd`/nginx-server.conf:/etc/nginx/conf.d/server.conf" trafex/alpine-nginx-php7
+    docker run -v "`pwd`/nginx-server.conf:/etc/nginx/conf.d/server.conf" halobear/php_nginx:8.0
 
 PHP configuration:
 
-    docker run -v "`pwd`/php-setting.ini:/etc/php7/conf.d/settings.ini" trafex/alpine-nginx-php7
+    docker run -v "`pwd`/php-setting.ini:/etc/php7/conf.d/settings.ini" halobear/php_nginx:8.0
 
 PHP-FPM configuration:
 
-    docker run -v "`pwd`/php-fpm-settings.conf:/etc/php7/php-fpm.d/server.conf" trafex/alpine-nginx-php7
+    docker run -v "`pwd`/php-fpm-settings.conf:/etc/php7/php-fpm.d/server.conf" halobear/php_nginx:8.0
 
 _Note; Because `-v` requires an absolute path I've added `pwd` in the example to return the absolute path to the current directory_
 
@@ -57,7 +57,7 @@ _Note; Because `-v` requires an absolute path I've added `pwd` in the example to
 If you need [Composer](https://getcomposer.org/) in your project, here's an easy way to add it.
 
 ```dockerfile
-FROM trafex/alpine-nginx-php7:latest
+FROM halobear/php_nginx:8.0:latest
 
 # Install composer from the official image
 COPY --from=composer /usr/bin/composer /usr/bin/composer
@@ -85,6 +85,6 @@ RUN composer install \
 
 # continue stage build with the desired image and copy the source including the
 # dependencies downloaded by composer
-FROM trafex/alpine-nginx-php7
+FROM halobear/php_nginx:8.0
 COPY --chown=nginx --from=composer /app /var/www/html
 ```

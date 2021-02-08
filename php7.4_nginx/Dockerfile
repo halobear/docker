@@ -1,6 +1,8 @@
 FROM alpine:3.13
 LABEL Maintainer="KG" \
-      Description="Lightweight container with Nginx 1.18 & PHP 7.4 based on Alpine Linux."
+  Description="Lightweight container with Nginx 1.18 & PHP 7.4 based on Alpine Linux."
+
+ARG TZ=Asia/Shanghai
 
 # Install packages and remove default server definition
 RUN sed -i "s/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g" /etc/apk/repositories && \
@@ -8,6 +10,10 @@ RUN sed -i "s/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g" /etc/apk/re
   php7-zlib php7-xml php7-phar php7-intl php7-dom php7-xmlreader php7-ctype php7-session \
   php7-mbstring php7-gd php7-bcmath php7-tokenizer php7-pecl-redis nginx supervisor curl && \
   rm /etc/nginx/conf.d/default.conf \
+  # timezone
+  && apk --no-cache add tzdata \
+  && cp "/usr/share/zoneinfo/$TZ" /etc/localtime \
+  && echo "$TZ" > /etc/timezone \
   # ---------- clear works ----------
   && rm -rf /var/cache/apk/* /tmp/* /usr/share/man 
 
