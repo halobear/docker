@@ -324,7 +324,7 @@ if [[ -z "${EXTENSIONS##*,imagick,*}" ]]; then
     echo "---------- Install imagick ----------"
 	apk add --no-cache file-dev
 	apk add --no-cache imagemagick-dev
-    printf "\n" | pecl install imagick-3.4.4
+    printf "\n" | pecl install imagick-3.8.0
     docker-php-ext-enable imagick
 fi
 
@@ -458,7 +458,7 @@ fi
 
 if [[ -z "${EXTENSIONS##*,redis,*}" ]]; then
     echo "---------- Install redis ----------"
-    installExtensionFromTgz redis-6.1.0
+    installExtensionFromTgz redis-6.2.0
 fi
 
 if [[ -z "${EXTENSIONS##*,apcu,*}" ]]; then
@@ -542,7 +542,7 @@ if [[ -z "${EXTENSIONS##*,swoole,*}" ]]; then
     echo "---------- Install swoole ----------"
     isPhpVersionGreaterOrEqual 7 0
 
-    installExtensionFromTgz swoole-6.0.1
+    installExtensionFromTgz swoole-6.0.2
 fi
 
 if [[ -z "${EXTENSIONS##*,zip,*}" ]]; then

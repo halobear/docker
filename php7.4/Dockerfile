@@ -1,7 +1,7 @@
 FROM php:7.4-fpm-alpine
 
 ARG TZ=Asia/Shanghai
-ARG PHP_EXTENSIONS=bcmath,pdo_mysql,gd,opcache,xmlrpc,redis,pcntl,sockets,exif
+ARG PHP_EXTENSIONS=zip,bcmath,pdo_mysql,gd,opcache,xmlrpc,redis,pcntl,sockets,exif
 
 COPY ./conf/. /usr/local/etc/php/
 COPY ./extensions /tmp/extensions 
